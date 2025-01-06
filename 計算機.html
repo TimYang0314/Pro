@@ -116,6 +116,10 @@
 
             const { twoSongCount, oneSongCount, remaining } = calculateSonglists(tamb);
 
+            // Calculate the remaining units
+            const remainingTamz = tamb % TAMB_TO_TAMZ;
+            const remainingStars = tamz % TAMZ_TO_STAR;
+
             const resultDiv = document.getElementById("result");
             resultDiv.style.display = "block";
             resultDiv.innerHTML = `
@@ -128,6 +132,8 @@
                 <p>兩首歌單: ${twoSongCount} 組</p>
                 <p>一首歌單: ${oneSongCount} 組</p>
                 <p>剩餘探幣: ${remaining.toFixed(2)}</p>
+                <p>剩餘探鑽: ${remainingTamz.toFixed(2)}</p>
+                <p>剩餘星星: ${remainingStars.toFixed(2)}</p>
             `;
         }
     </script>
