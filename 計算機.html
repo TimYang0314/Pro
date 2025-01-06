@@ -66,8 +66,6 @@
     <script>
         const TAMB_TO_TAMZ = 14; // 1探幣 = 14探鑽
         const TAMZ_TO_STAR = 10; // 1探鑽 = 10星星
-        const TWO_SONG_COST = 888; // 2-songlist cost in 探幣
-        const ONE_SONG_COST = 299; // 1-songlist cost in 探幣
 
         function convertUnits(amount, fromUnit, toUnit) {
             let baseAmount;
@@ -91,16 +89,6 @@
             }
         }
 
-        function calculateSonglists(tamb) {
-            const twoSongCount = Math.floor(tamb / TWO_SONG_COST);
-            let remaining = tamb % TWO_SONG_COST;
-
-            const oneSongCount = Math.floor(remaining / ONE_SONG_COST);
-            remaining %= ONE_SONG_COST;
-
-            return { twoSongCount, oneSongCount, remaining };
-        }
-
         function calculate() {
             const amount = parseFloat(document.getElementById("amount").value);
             const unit = document.getElementById("unit").value;
@@ -114,12 +102,6 @@
             const tamz = convertUnits(amount, unit, "探鑽");
             const stars = convertUnits(amount, unit, "星星");
 
-            const { twoSongCount, oneSongCount, remaining } = calculateSonglists(tamb);
-
-            // Calculate the remaining units
-            const remainingTamz = tamb % TAMB_TO_TAMZ;
-            const remainingStars = tamz % TAMZ_TO_STAR;
-
             const resultDiv = document.getElementById("result");
             resultDiv.style.display = "block";
             resultDiv.innerHTML = `
@@ -127,13 +109,6 @@
                 <p>探幣: ${tamb.toFixed(2)}</p>
                 <p>探鑽: ${tamz.toFixed(2)}</p>
                 <p>星星: ${stars.toFixed(2)}</p>
-                <br>
-                <p><strong>可購買歌單:</strong></p>
-                <p>兩首歌單: ${twoSongCount} 組</p>
-                <p>一首歌單: ${oneSongCount} 組</p>
-                <p>剩餘探幣: ${remaining.toFixed(2)}</p>
-                <p>剩餘探鑽: ${remainingTamz.toFixed(2)}</p>
-                <p>剩餘星星: ${remainingStars.toFixed(2)}</p>
             `;
         }
     </script>
